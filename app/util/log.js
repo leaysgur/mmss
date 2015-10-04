@@ -9,14 +9,14 @@ var Log = function(options) {
 Log.prototype = {
   constructor: Log,
   l: function(str) {
-    this._print('[LOG] ' + str);
+    this._print('[LOG] ', str);
   },
   e: function(str) {
-    this._print('[ERR] ' + str);
+    this._print('[ERR] ', str);
   },
-  _print: function(str) {
+  _print: function() {
     if (this.silent) { return; }
-    console.log(str);
+    console.log.apply(console, arguments);
   }
 };
 
