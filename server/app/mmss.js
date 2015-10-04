@@ -12,22 +12,27 @@ MMSS.prototype = {
   start: function(config) {
     this.config = config;
 
-    this.build(function() {
+    this.build(function(err) {
+      if (err) {
+        console.error('Building file list failed..');
+        process.exit(1);
+      }
       // 遅延ロードじゃないとダメ
-      var server = require('app/app').listen(8888, function () {
+      var server = require('app/server').listen(config.PORT, function() {
         var port = server.address().port;
         console.log('App is running on port: %s', port);
       });
     });
   },
   build: function(fn) {
+    console.log('Building file list start...');
     var that = this;
     utils.dir2obj(this.config.MUSIC_PATH, function(err, res) {
-      // TODO;
-      if (err) { return; }
+      if (err) { fn(err); }
+      console.log('Building file list finish!');
 
       that.music = res;
-      fn && fn();
+      fn && fn(null);
     });
   }
 };

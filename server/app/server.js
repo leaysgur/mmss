@@ -3,7 +3,7 @@
 var express = require('express');
 var app = express();
 
-app.set('views', __dirname + '/../tmpl');
+app.set('views', __dirname + '/../tmpls');
 app.set('view engine', 'html');
 app.engine('html', require('consolidate').lodash);
 
