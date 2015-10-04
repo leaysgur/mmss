@@ -1,0 +1,20 @@
+{
+  "name": "mmss",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "NODE_PATH=./app node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leader22/mmss.git"
+  },
+  "author": "leader22",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leader22/mmss/issues"
+  },
+  "homepage": "https://github.com/leader22/mmss"
+}
