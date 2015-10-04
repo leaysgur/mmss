@@ -72,6 +72,26 @@ MMSS.prototype = {
     });
 
     fn(null, artists);
+  },
+  getAlbumList: function(name, fn) {
+    var albums = [];
+
+    var artist = this.music.filter(function(artist) {
+      return artist.n === name;
+    })[0];
+
+    artist.c.forEach(function(album) {
+      // Disc1とか
+      // if ('c' in album.c[0]) {
+      //   album.c.forEach(function(album) {
+      //     _album.concat(album.c);
+      //   });
+      // } else {
+        albums.push(album);
+      // }
+    });
+
+    fn(null, albums);
   }
 };
 

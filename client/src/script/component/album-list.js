@@ -3,24 +3,35 @@
 var axios = require('axios');
 var $id = document.getElementById.bind(document);
 
-var ArtistList = function() {
+var AlbumList = function() {
   this.data = {
     items: []
   };
   this.init.apply(this);
 };
-ArtistList.prototype = {
-  constructor: ArtistList,
+AlbumList.prototype = {
+  constructor: AlbumList,
   init: function() {
     this.$ = {
-      list: $id('artist-list')
+      list: $id('album-list')
     };
-    this._load();
+
+    window.addEventListener('message', this, false);
   },
-  _load: function() {
+  handleEvent: function(ev) {
+    var data= ev.data;
+    if (data.action === 'SELECT_ARTIST') {
+      this._load(data.name);
+    }
+  },
+  _load: function(name) {
     var that = this;
     axios
-      .get('/api/artist-list')
+      .get('/api/album-list', {
+        params: {
+          n: name
+        }
+      })
       .then(that._handleRes.bind(that))
       .then(that._bindEvent.bind(that))
       .catch(function(res) {
@@ -30,22 +41,29 @@ ArtistList.prototype = {
   _handleRes: function(res) {
     this.data.items = res.data;
     var frag = document.createDocumentFragment();
-    res.data.forEach(function(name) {
+    res.data.forEach(function(album) {
       var li = document.createElement('li');
+      var name = album.n;
       li.textContent = name;
       li.setAttribute('data-name', name);
       frag.appendChild(li);
     });
+    this.$.list.innerHTML = '';
     this.$.list.appendChild(frag);
   },
   _bindEvent: function() {
+    var items = this.data.items;
     this.$.list.addEventListener('click', function(ev) {
       var name = ev.target.getAttribute('data-name');
       if (name.length === 0) { return; }
 
-      window.postMessage({ action: 'SELECT_ARTIST', name: name }, location.origin);
+      var album = items.filter(function(album) {
+        return album.n === name;
+      })[0];
+
+      window.postMessage({ action: 'SELECT_ALBUM', album: album }, location.origin);
     }, false);
    }
 };
 
-module.exports = ArtistList;
+module.exports = AlbumList;
