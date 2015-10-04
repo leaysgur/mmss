@@ -4,6 +4,9 @@
   "description": "My Music Streaming Server",
   "main": "server/main.js",
   "scripts": {
+    "build-css": "",
+    "build-js": "",
+    "watch-js": "watchify client/src/script/main.js -o client/build/main.js -v",
     "start": "NODE_PATH=./server node server/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +21,12 @@
   },
   "homepage": "https://github.com/leader22/mmss",
   "dependencies": {
+    "axios": "^0.7.0",
     "consolidate": "^0.13.1",
     "express": "^4.13.3",
     "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "watchify": "^3.4.0"
   }
 }

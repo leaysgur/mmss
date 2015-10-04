@@ -8,7 +8,6 @@ app.set('view engine', 'html');
 app.engine('html', require('consolidate').lodash);
 
 // TODO: srcはいらなくなる
-app.use(express.static('client/src'));
 app.use(express.static('client/build'));
 app.use(express.static('client/public'));
 
