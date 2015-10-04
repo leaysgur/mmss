@@ -34,6 +34,13 @@ MMSS.prototype = {
       that.music = res;
       fn && fn(null);
     });
+  },
+  search: function(query, fn) {
+    if (query === null) {
+      return fn(null, []);
+    }
+
+    fn(null, []);
   }
 };
 
