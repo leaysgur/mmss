@@ -36,11 +36,31 @@ MMSS.prototype = {
     });
   },
   search: function(query, fn) {
+    var foundAlbums = [];
     if (query === null) {
-      return fn(null, []);
+      return fn(null, foundAlbums);
     }
 
-    fn(null, []);
+    var qRe = new RegExp(query, 'i');
+    // まずはアーティスト名で探す
+    var foundArtists = this.music.filter(function(artist) {
+      return ('c' in artist) && qRe.test(artist.n);
+    });
+
+    if (foundArtists.length === 0) {
+      return fn(null, foundAlbums);
+    }
+
+    foundArtists.forEach(function(artist) {
+      artist.c.forEach(function(album) {
+        foundAlbums.push({
+          artist: artist.n,
+          album:  album.n
+        });
+      });
+    });
+
+    fn(null, foundAlbums);
   }
 };
 

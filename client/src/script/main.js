@@ -31,7 +31,7 @@
       })
       .then(that._handleRes.bind(that))
       .catch(function (res) {
-        console.log(res);
+        console.error(res);
       });
     },
     _handleRes: function(res) {
