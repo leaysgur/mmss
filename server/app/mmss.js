@@ -61,6 +61,17 @@ MMSS.prototype = {
     });
 
     fn(null, foundAlbums);
+  },
+  getArtistList: function(fn) {
+    var artists = [];
+
+    this.music.forEach(function(artist) {
+      if ('c' in artist) {
+        artists.push(artist.n);
+      }
+    });
+
+    fn(null, artists);
   }
 };
 

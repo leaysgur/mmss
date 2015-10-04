@@ -12,4 +12,11 @@ router.get('/refresh', function(req, res) {
   });
 });
 
+router.get('/artist-list', function(req, res) {
+  mmss.getArtistList(function(err, items) {
+    if (err) { return res.json({ error: 1 }); }
+    res.json(items);
+  });
+});
+
 module.exports = router;
