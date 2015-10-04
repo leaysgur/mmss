@@ -2,9 +2,9 @@
   "name": "mmss",
   "version": "0.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
-    "start": "NODE_PATH=./app node app.js",
+    "start": "NODE_PATH=./lib node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

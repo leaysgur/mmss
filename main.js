@@ -2,7 +2,7 @@
 var fs = require('fs');
 
 var config = require('config');
-var mmss   = require('server');
+var mmss   = require('mmss');
 
 
 // 引数で音源のあるディレクトリのパスをもらう
