@@ -13,8 +13,8 @@ MMSS.prototype = {
     this.config = config;
 
     this.build(function() {
-      var app    = require('app/index');
-      var server = app.listen(8888, function () {
+      // 遅延ロードじゃないとダメ
+      var server = require('app/app').listen(8888, function () {
         var port = server.address().port;
         console.log('App is running on port: %s', port);
       });

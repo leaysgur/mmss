@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
-var mmss = require('mmss');
+var mmss = require('app/mmss');
 
 router.get('/files', function (req, res) {
   // var json = JSON.stringify(mmss.music, null, 2);
