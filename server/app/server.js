@@ -12,7 +12,10 @@ app.set('view engine', 'html');
 app.engine('html', require('consolidate').lodash);
 
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 app.use(session({
   secret: 'mmss',
   resave: false,
