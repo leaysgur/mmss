@@ -92,6 +92,12 @@ MMSS.prototype = {
     });
 
     fn(null, albums);
+  },
+  getTrack: function(name, fn) {
+    var track = {
+      path: this.config.MUSIC_PATH + '/' + name
+    };
+    fn(null, track);
   }
 };
 

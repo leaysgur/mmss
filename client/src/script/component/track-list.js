@@ -3,6 +3,9 @@
 var $id = document.getElementById.bind(document);
 
 var TrackList = function() {
+  this.data = {
+    artistName: null
+  };
   this.init.apply(this);
 };
 TrackList.prototype = {
@@ -16,21 +19,23 @@ TrackList.prototype = {
     window.addEventListener('message', this, false);
   },
   handleEvent: function(ev) {
-    var data= ev.data;
+    var data = ev.data;
     if (data.action === 'SELECT_ALBUM') {
       this._show(data.album);
     }
     if (data.action === 'SELECT_ARTIST') {
+      this.data.artistName = data.name;
       this._hide();
     }
   },
   _show: function(album) {
+    var artistName = this.data.artistName;
     var frag = document.createDocumentFragment();
     album.c.forEach(function(track) {
       var li = document.createElement('li');
       var name = track.n;
       li.textContent = name;
-      li.setAttribute('data-name', album.n + '/' + name);
+      li.setAttribute('data-name', artistName + '/' + album.n + '/' + name);
       frag.appendChild(li);
     });
     this.$.list.innerHTML = '';
@@ -44,7 +49,6 @@ TrackList.prototype = {
       var name = ev.target.getAttribute('data-name');
       if (name.length === 0) { return; }
 
-      console.log(name);
       window.postMessage({ action: 'SELECT_TRACK', name: name }, location.origin);
     }, false);
    }

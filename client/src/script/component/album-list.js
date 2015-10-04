@@ -19,7 +19,7 @@ AlbumList.prototype = {
     window.addEventListener('message', this, false);
   },
   handleEvent: function(ev) {
-    var data= ev.data;
+    var data = ev.data;
     if (data.action === 'SELECT_ARTIST') {
       this._load(data.name);
     }

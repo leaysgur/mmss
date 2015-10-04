@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+
 var express = require('express');
 var router  = express.Router();
 var mmss    = require('app/mmss');
@@ -26,6 +28,17 @@ router.get('/album-list', function(req, res) {
   mmss.getAlbumList(name, function(err, items) {
     if (err) { return res.json({ error: 1 }); }
     res.json(items);
+  });
+});
+
+// 曲
+router.get('/track', function(req, res) {
+  var name = req.query.n || null;
+  mmss.getTrack(name, function(err, track) {
+    if (err) { return res.json({ error: 1 }); }
+    res.set({ 'Content-Type': 'audio/mpeg' });
+    var readStream = fs.createReadStream(track.path);
+    readStream.pipe(res);
   });
 });
 
