@@ -1,10 +1,10 @@
 'use strict';
 var fs = require('fs');
 
-var Log = require('util/log');
-var log = new Log();
+var log = new (require('util/log'))();
 
 var config = require('config');
+var mmss   = require('server');
 
 
 // 引数で音源のあるディレクトリのパスをもらう
@@ -22,5 +22,6 @@ if (fs.statSync(MUSIC_PATH).isDirectory() === false) {
   process.exit(1);
 }
 
+// 無事に確保できたらサーバー立てる
 config.MUSIC_PATH = MUSIC_PATH;
-console.log(config);
+mmss.start(config);
