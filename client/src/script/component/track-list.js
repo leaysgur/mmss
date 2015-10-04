@@ -1,0 +1,53 @@
+'use strict';
+
+var $id = document.getElementById.bind(document);
+
+var TrackList = function() {
+  this.init.apply(this);
+};
+TrackList.prototype = {
+  constructor: TrackList,
+  init: function() {
+    this.$ = {
+      list: $id('track-list')
+    };
+
+    this._bindEvent();
+    window.addEventListener('message', this, false);
+  },
+  handleEvent: function(ev) {
+    var data= ev.data;
+    if (data.action === 'SELECT_ALBUM') {
+      this._show(data.album);
+    }
+    if (data.action === 'SELECT_ARTIST') {
+      this._hide();
+    }
+  },
+  _show: function(album) {
+    var frag = document.createDocumentFragment();
+    album.c.forEach(function(track) {
+      var li = document.createElement('li');
+      var name = track.n;
+      li.textContent = name;
+      li.setAttribute('data-name', album.n + '/' + name);
+      frag.appendChild(li);
+    });
+    this.$.list.innerHTML = '';
+    this.$.list.appendChild(frag);
+  },
+  _hide: function() {
+    this.$.list.innerHTML = '';
+   },
+  _bindEvent: function() {
+    this.$.list.addEventListener('click', function(ev) {
+      var name = ev.target.getAttribute('data-name');
+      if (name.length === 0) { return; }
+
+      console.log(name);
+      window.postMessage({ action: 'SELECT_TRACK', name: name }, location.origin);
+    }, false);
+   }
+};
+
+module.exports = TrackList;
