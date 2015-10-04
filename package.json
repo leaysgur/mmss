@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/leader22/mmss/issues"
   },
-  "homepage": "https://github.com/leader22/mmss"
+  "homepage": "https://github.com/leader22/mmss",
+  "dependencies": {
+    "express": "^4.13.3",
+    "jsondir": "^0.1.3"
+  }
 }
