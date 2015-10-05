@@ -36,7 +36,11 @@ TrackList.prototype = {
     album.c.forEach(function(track) {
       var li = document.createElement('li');
       var name = track.n;
-      li.textContent = name;
+      var dispName = track.n.split(artistName + ' - ')[1];
+      var ext = /\.\w+$/.exec(dispName)[0];
+      dispName = dispName.split(ext)[0];
+
+      li.textContent = dispName;
       li.setAttribute('data-name', artistName + '/' + album.n + '/' + name);
       frag.appendChild(li);
     });
