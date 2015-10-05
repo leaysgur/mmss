@@ -16,5 +16,3 @@ case '/player':
 default:
   break;
 }
-
-window.addEventListener('message', function(ev) { console.info(ev.data); });
