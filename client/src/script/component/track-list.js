@@ -4,7 +4,8 @@ var $id = document.getElementById.bind(document);
 
 var TrackList = function() {
   this.data = {
-    artistName: null
+    artistName: null,
+    album: null
   };
   this.init.apply(this);
 };
@@ -21,11 +22,15 @@ TrackList.prototype = {
   handleEvent: function(ev) {
     var data = ev.data;
     if (data.action === 'SELECT_ALBUM') {
+      this.data.album = data.album;
       this._show(data.album);
     }
     if (data.action === 'SELECT_ARTIST') {
       this.data.artistName = data.name;
       this._hide();
+    }
+    if (data.action === 'TRACK_END') {
+      this._triggerNext(data.name);
     }
   },
   _show: function(album) {
@@ -51,6 +56,16 @@ TrackList.prototype = {
 
       window.postMessage({ action: 'SELECT_TRACK', name: name }, location.origin);
     }, false);
+   },
+  _triggerNext: function(name) {
+    var trackList = this.data.album.c.map(function(track) { return track.n; });
+    var idx = trackList.indexOf(name) + 1;
+    idx = idx === trackList.length ? 0 : idx;
+    var li = this.$.list.getElementsByTagName('li');
+    var ev = document.createEvent('MouseEvents');
+    ev.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+    li[idx].dispatchEvent(ev);
    }
 };
 

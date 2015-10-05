@@ -4,13 +4,17 @@ var axios = require('axios');
 var $id = document.getElementById.bind(document);
 
 var Player = function() {
+  this.data = {
+    name: null
+  };
   this.init.apply(this);
 };
 Player.prototype = {
   constructor: Player,
   init: function() {
     this.$ = {
-      player: $id('player')
+      player: $id('player'),
+      audio:  $id('audio')
     };
 
     window.addEventListener('message', this, false);
@@ -18,6 +22,7 @@ Player.prototype = {
   handleEvent: function(ev) {
     var data = ev.data;
     if (data.action === 'SELECT_TRACK') {
+      this.data.name = data.name;
       this._load(data.name);
     }
   },
@@ -31,21 +36,27 @@ Player.prototype = {
         }
       })
       .then(that._handleRes.bind(that))
-      // .then(that._bindEvent.bind(that))
+      .then(that._bindEvent.bind(that))
       .catch(function(res) {
         console.error(res);
       });
   },
   _handleRes: function(res) {
-    var ctx = new window.AudioContext();
-    var source = ctx.createBufferSource();
-    ctx.decodeAudioData(res.data, function(audioBuffer) {
-      source.buffer = audioBuffer;
-      source.connect(ctx.destination);
-      source.start(ctx.currentTime);
-      source.stop(ctx.currentTime + 1);
-    });
-   }
+    var blob = new window.Blob([res.data], { type: 'audio/mpeg' });
+    var objectUrl = window.URL.createObjectURL(blob);
+    this.$.audio.removeEventListener('ended', this._handleTrackEnd.bind(this), false);
+    this.$.audio.src = objectUrl;
+  },
+  _bindEvent: function() {
+    this.$.audio.addEventListener('ended', this._handleTrackEnd.bind(this), false);
+  },
+  _handleTrackEnd: function() {
+    this.$.audio.removeEventListener('ended', this._handleTrackEnd.bind(this), false);
+
+    var name = this.data.name;
+    var fileName = name.split('/').pop();
+    window.postMessage({ action: 'TRACK_END', name: fileName }, location.origin);
+  }
 };
 
 module.exports = Player;

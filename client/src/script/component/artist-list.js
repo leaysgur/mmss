@@ -45,7 +45,7 @@ ArtistList.prototype = {
 
       window.postMessage({ action: 'SELECT_ARTIST', name: name }, location.origin);
     }, false);
-   }
+  }
 };
 
 module.exports = ArtistList;
