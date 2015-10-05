@@ -3,7 +3,6 @@ My Music Streaming Server!
 
 ## TODO
 ### 今日
-- [ ] postMessageのラッパ
 - [ ] 見た目を全力で取り繕う
 
 ### 明日
@@ -53,21 +52,24 @@ app.use('/api', middleware.isLoginAPI, require('routes/auth/api'));
 ```
 
 - Vueify
+
 ```html
 <style>
-p { color: navy; }
+  p { color: navy; }
 </style>
+
 <template>
-<p>
-  {{msg}} world!
-</p>
+  <p>
+    {{msg}} world!
+  </p>
 </template>
+
 <script>
-module.exports = {
-  data: function() {
-    return { msg: 'Hello' };
-  }
-};
+  module.exports = {
+    data: function() {
+      return { msg: 'Hello' };
+    }
+  };
 </script>
 ```
 
