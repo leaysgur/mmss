@@ -1,6 +1,8 @@
 'use strict';
 
+var fs    = require('fs');
 var utils = require('utils');
+var ID3   = require('id3');
 
 var MMSS = function() {
   this.config = {};
@@ -90,6 +92,31 @@ MMSS.prototype = {
         album.c = tracks;
       }
       albums.push(album);
+    });
+
+    var MUSIC_PATH = this.config.MUSIC_PATH;
+    albums = albums.map(function(album) {
+      var dirPath = MUSIC_PATH + '/' + name + '/' + album.n + '/';
+      album.c = album.c.map(function(track) {
+        var path = dirPath + track.n;
+
+        var fileBuffer = fs.readFileSync(path);
+        var id3 = new ID3(fileBuffer);
+        id3.parse();
+        track.t = {
+          ti: id3.get('title'),
+          al: id3.get('album'),
+          ar: id3.get('artist'),
+          tr: id3.get('track')
+        };
+
+        return track;
+      }).sort(function(a, b) {
+        var aNum = a.t.tr.split('/')[0]|0;
+        var bNum = b.t.tr.split('/')[0]|0;
+        return aNum > bNum ? 1 : -1;
+      });
+      return album;
     });
 
     fn(null, albums);
