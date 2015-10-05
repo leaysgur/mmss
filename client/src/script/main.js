@@ -11,7 +11,7 @@ case '/login':
   break;
 case '/player':
   new Vue(require('./app/player.vue')).$mount('#jsApp');
-  require('./component/notifier');
+  require('./utils/notifier');
   break;
 default:
   break;
