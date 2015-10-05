@@ -5,7 +5,7 @@ module.exports = {
     if ('isLogin' in req.session) {
       next();
     } else {
-      res.redirect('/');
+      res.redirect('/login');
     }
   },
   isLoginAPI: function(req, res, next) {

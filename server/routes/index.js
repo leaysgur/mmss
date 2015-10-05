@@ -4,12 +4,11 @@ var express = require('express');
 var router  = express.Router();
 
 router.get('/', function(req, res) {
-  res.render('index', { hoge: 'hogehoge' });
+  res.render('index');
 });
 
-router.get('/logout', function(req, res) {
-  delete req.session.isLogin;
-  res.redirect('/');
+router.get('/login', function(req, res) {
+  res.render('login');
 });
 
 router.post('/login', function(req, res) {
@@ -21,6 +20,11 @@ router.post('/login', function(req, res) {
   req.session.isLogin = true;
 
   res.redirect('/player');
+});
+
+router.get('/logout', function(req, res) {
+  delete req.session.isLogin;
+  res.redirect('/login');
 });
 
 module.exports = router;
