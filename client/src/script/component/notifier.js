@@ -9,16 +9,20 @@ var Notifier = function() {
 Notifier.prototype = {
   constructor: Notifier,
   init: function() {
-
     if (Notification && Notification.permission !== 'granted') {
-      Notification.requestPermission(function(status) {
+      this._initNtf();
+    }
+
+    window.addEventListener('message', this, false);
+  },
+  _initNtf: function() {
+    Notification
+      .requestPermission()
+      .then(function(status) {
         if (Notification.permission !== status) {
           Notification.permission = status;
         }
       });
-    }
-
-    window.addEventListener('message', this, false);
   },
   handleEvent: function(ev) {
     var action = ev.data.action,
@@ -31,11 +35,12 @@ Notifier.prototype = {
     var ntf   = this.data.ntfInstance,
         timer = this.data.ntfTimer;
     ntf = new Notification(name, {
+      tag:  'nowplaying',
       body: 'body',
       icon: ''
     });
     timer = setTimeout(function() {
-      ntf.close();
+      ntf.close.bind(ntf)();
       clearTimeout(timer);
     }, 3000);
   }
