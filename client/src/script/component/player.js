@@ -25,6 +25,10 @@ Player.prototype = {
       this.data.name = data.name;
       this._load(data.name);
     }
+    if (data.action === 'PLAY_TRACK') {
+      this.data.name = data.name;
+      this._load(data.name);
+    }
   },
   _load: function(name) {
     var that = this;
@@ -54,8 +58,7 @@ Player.prototype = {
     this.$.audio.removeEventListener('ended', this._handleTrackEnd.bind(this), false);
 
     var name = this.data.name;
-    var fileName = name.split('/').pop();
-    window.postMessage({ action: 'TRACK_END', name: fileName }, location.origin);
+    window.postMessage({ action: 'TRACK_END', name: name }, location.origin);
   }
 };
 

@@ -12,6 +12,8 @@ case '/player':
   new TrackList();
   var Player = require('./component/player');
   new Player();
+  var PlayList = require('./component/play-list');
+  new PlayList();
   break;
 case '/':
 default:
