@@ -73,7 +73,7 @@ MMSS.prototype = {
       }
     });
 
-    fn(null, artists);
+    fn(null, artists.sort());
   },
   getAlbumList: function(name, fn) {
     var albums = [];
