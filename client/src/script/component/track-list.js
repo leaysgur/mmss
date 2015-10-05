@@ -29,6 +29,22 @@ TrackList.prototype = {
     if (action === 'SELECT_ARTIST') {
       this.data.artistName = data.name;
     }
+    if (action === 'TRACK_START') {
+      this._sendToNotifier(data.name);
+    }
+  },
+  _sendToNotifier: function(name) {
+    var pathArr = name.split('/');
+    // アーティスト名
+    pathArr.shift();
+    // アルバム名
+    pathArr.shift();
+    // 残るのがnameで使ってるキー
+    var fileName = pathArr.join('/');
+    var tags = this.data.album.c.filter(function(track) {
+      return track.n === fileName;
+    })[0].t;
+    window.postMessage({ action: 'NOTIFY_NOWPLAYING', data: tags }, location.origin);
   },
   _show: function(album) {
     var artistName = this.data.artistName;

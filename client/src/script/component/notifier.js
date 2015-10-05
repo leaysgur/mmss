@@ -27,18 +27,18 @@ Notifier.prototype = {
   handleEvent: function(ev) {
     var action = ev.data.action,
         data   = ev.data.data;
-    if (action === 'TRACK_START') {
-      this._show(data.name);
+    if (action === 'NOTIFY_NOWPLAYING') {
+      this._show(data);
     }
   },
-  _show: function(name) {
+  _show: function(tag) {
     var ntf   = this.data.ntfInstance,
         timer = this.data.ntfTimer;
-    ntf = new Notification(name, {
+    ntf = new Notification(tag.ti, {
       tag:  'nowplaying',
-      body: 'body',
-      icon: ''
+      body: tag.ar + ' - ' + tag.al,
     });
+
     timer = setTimeout(function() {
       ntf.close.bind(ntf)();
       clearTimeout(timer);
