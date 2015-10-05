@@ -1,5 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
 html,
 body {
   background-color: #eee;
 }
 
+h1,
+h2,
+h3 { text-align: center; }
+
+h1 {
+  font-size: 1.2em;
+}
+h2 {
+  font-size: 1em;
+}
+h3 {
+  font-size: .8em;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 40px;
+  font-size: 1em;
+  text-indent: 8px;
+}
+
+ul {
+  list-style: none;
+}

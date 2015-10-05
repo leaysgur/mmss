@@ -1,20 +1,19 @@
 @import
-  "normalize",
   "common";
-
 
 .header {
   position: relative;
   line-height: 32px;
   padding: 4px 0;
+  margin-bottom: 8px;
   text-align: center;
   background-color: #000;
   color: #fff;
 
-  #{&}-title {
+  &-title {
     flex: 1 1 auto;
   }
-  #{&}-menu {
+  &-menu {
     position: absolute;
     right: 4px;
     top: 0;
@@ -24,7 +23,11 @@
     height: 32px;
     width: 100px;
     color: #fff;
-    background-color: gray;
+    background-color: #aaa;
     text-decoration: none;
   }
+}
+
+.content {
+  margin: 8px;
 }

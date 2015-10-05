@@ -54,7 +54,7 @@ app.use('/api', middleware.isLoginAPI, require('routes/auth/api'));
 - Vueify
 
 ```html
-<style>
+<style lang="scss">
   p { color: navy; }
 </style>
 
@@ -75,6 +75,10 @@ app.use('/api', middleware.isLoginAPI, require('routes/auth/api'));
 
 またこのパターン。
 ただしPolymerよりも格段に使いやすかった(個人の感想です)
+
+- styleで`stylus`とか`less`とか`scss`とか使える
+- scriptで`coffee`とか使える
+- 空でも`style`タグ書いたら挿入されちゃうので注意
 
 ## 作ってみて
 一言でいうと、「iTunesは神！」

@@ -1,19 +1,14 @@
-<style>
-</style>
 <template>
   <h2>アーティスト検索</h2>
-  <p>
-    アーティスト名をいれると持ってるアルバムが表示される
+  <p class="content">
+    アーティスト名を入力すると、持ってるアルバムがわかります
   </p>
-  <search-view></search-view>
-
-  <a href="/player">playerへ</a>
+  <div class="content">
+    <search-view></search-view>
+  </div>
 </template>
 <script>
 module.exports = {
-  data: function() {
-    return {};
-  },
   components: {
     searchView: require('../components/search.vue')
   }
