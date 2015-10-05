@@ -1,7 +1,13 @@
 <style>
 </style>
 <template>
-  <audio v-attr="src: srcUrl" v-on="ended: onAudioEnded" controls autoplay></audio>
+  <audio
+    v-show="srcUrl"
+    v-attr="src: srcUrl"
+    v-on="ended: onAudioEnded"
+    controls
+    autoplay
+  ></audio>
 </template>
 <script>
 var axios = require('axios');
