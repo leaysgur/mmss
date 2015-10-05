@@ -3,9 +3,8 @@ My Music Streaming Server!
 
 ## TODO
 ### 今日
-- [ ] クライアントのjs整理
-- [ ] 見た目を全力で取り繕う
 - [ ] postMessageのラッパ
+- [ ] 見た目を全力で取り繕う
 
 ### 明日
 - [ ] 見た目残り
