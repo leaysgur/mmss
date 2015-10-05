@@ -27,7 +27,6 @@ TrackList.prototype = {
     }
     if (data.action === 'SELECT_ARTIST') {
       this.data.artistName = data.name;
-      this._hide();
     }
   },
   _show: function(album) {
@@ -43,9 +42,6 @@ TrackList.prototype = {
     this.$.list.innerHTML = '';
     this.$.list.appendChild(frag);
   },
-  _hide: function() {
-    this.$.list.innerHTML = '';
-   },
   _bindEvent: function() {
     this.$.list.addEventListener('click', function(ev) {
       var name = ev.target.getAttribute('data-name');

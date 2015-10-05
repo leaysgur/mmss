@@ -16,6 +16,7 @@ AlbumList.prototype = {
       list: $id('album-list')
     };
 
+    this._bindEvent();
     window.addEventListener('message', this, false);
   },
   handleEvent: function(ev) {
@@ -33,7 +34,6 @@ AlbumList.prototype = {
         }
       })
       .then(that._handleRes.bind(that))
-      .then(that._bindEvent.bind(that))
       .catch(function(res) {
         console.error(res);
       });
@@ -52,18 +52,18 @@ AlbumList.prototype = {
     this.$.list.appendChild(frag);
   },
   _bindEvent: function() {
-    var items = this.data.items;
-    this.$.list.addEventListener('click', function(ev) {
-      var name = ev.target.getAttribute('data-name');
-      if (name.length === 0) { return; }
+    this.$.list.addEventListener('click', this._handleSelectAlbum.bind(this), false);
+   },
+  _handleSelectAlbum: function(ev) {
+    var name = ev.target.getAttribute('data-name');
+    if (name.length === 0) { return; }
 
-      var album = items.filter(function(album) {
-        return album.n === name;
-      })[0];
+    var album = this.data.items.filter(function(album) {
+      return album.n === name;
+    })[0];
 
-      window.postMessage({ action: 'SELECT_ALBUM', album: album }, location.origin);
-    }, false);
-   }
+    window.postMessage({ action: 'SELECT_ALBUM', album: album }, location.origin);
+  }
 };
 
 module.exports = AlbumList;
