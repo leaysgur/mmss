@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  res.render('login');
+  res.render('index');
 });
 
 router.post('/login', function(req, res) {

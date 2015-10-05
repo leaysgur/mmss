@@ -4,12 +4,12 @@
   <input type="text" v-model="query">
   <button v-on="click: execSearch" v-attr="disabled: isQueryEmpty">Search</button>
   <div>
-    <ul v-show="found.length !== 0">
+    <ul>
+      <li v-show="isNotFound">見つかりませんでした</li>
       <li v-repeat="set in found">
         {{set.artist}} - {{set.album}}
       </li>
     </ul>
-    <p v-show="found.length === 0">見つかりませんでした</p>
   </div>
 </template>
 <script>
@@ -18,6 +18,7 @@ var axios = require('axios');
 module.exports = {
   data: function() {
     return {
+      isNotFound: false,
       query: '',
       found: []
     };
@@ -40,9 +41,13 @@ module.exports = {
       });
     },
     _handleRes: function(res) {
+      if (res.data.length === 0) {
+        this.isNotFound = true;
+        return;
+      }
       this.found = res.data;
+      this.isNotFound = false;
     }
   }
 };
 </script>
-
