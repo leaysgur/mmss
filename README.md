@@ -52,6 +52,28 @@ app.use('/',    middleware.isLogin,    require('routes/auth/index'));
 app.use('/api', middleware.isLoginAPI, require('routes/auth/api'));
 ```
 
+- Vueify
+```html
+<style>
+p { color: navy; }
+</style>
+<template>
+<p>
+  {{msg}} world!
+</p>
+</template>
+<script>
+module.exports = {
+  data: function() {
+    return { msg: 'Hello' };
+  }
+};
+</script>
+```
+
+またこのパターン。
+ただしPolymerよりも格段に使いやすかった(個人の感想です)
+
 ## 作ってみて
 一言でいうと、「iTunesは神！」
 
