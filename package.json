@@ -4,8 +4,9 @@
   "description": "My Music Streaming Server",
   "main": "server/main.js",
   "scripts": {
-    "build-css": "",
+    "build-css": "node-sass --output-style compressed client/src/style/main.scss client/build/main.css",
     "build-js": "",
+    "watch-css": "node-sass -w -r client/src/style/main.scss client/build/main.css",
     "watch-js": "watchify -v -t vueify -e client/src/script/main.js -o client/build/main.js",
     "dev": "NODE_PATH=./server node-dev --debug server/main.js",
     "prod": "NODE_PATH=./server node server/main.js",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "insert-css": "^0.2.0",
     "node-dev": "^2.7.1",
+    "node-sass": "^3.3.3",
     "vueify": "^1.1.5",
     "watchify": "^3.4.0"
   }

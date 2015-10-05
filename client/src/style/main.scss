@@ -1,0 +1,30 @@
+@import
+  "normalize",
+  "common";
+
+
+.header {
+  position: relative;
+  line-height: 32px;
+  padding: 4px 0;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+
+  #{&}-title {
+    flex: 1 1 auto;
+  }
+  #{&}-menu {
+    position: absolute;
+    right: 4px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 0 8px;
+    height: 32px;
+    width: 100px;
+    color: #fff;
+    background-color: gray;
+    text-decoration: none;
+  }
+}

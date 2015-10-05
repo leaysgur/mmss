@@ -2,13 +2,18 @@
 
 var express = require('express');
 var router  = express.Router();
+var config  = require('config');
 
 router.get('/', function(req, res) {
-  res.render('index');
+  res.render('index', {
+    other: config.APPS.STREAMING
+  });
 });
 
 router.get('/login', function(req, res) {
-  res.render('index');
+  res.render('index', {
+    other: config.APPS.SEARCH
+  });
 });
 
 router.post('/login', function(req, res) {
