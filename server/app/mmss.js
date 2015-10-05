@@ -82,13 +82,14 @@ MMSS.prototype = {
 
     artist.c.forEach(function(album) {
       // Disc1とか
-      // if ('c' in album.c[0]) {
-      //   album.c.forEach(function(album) {
-      //     _album.concat(album.c);
-      //   });
-      // } else {
-        albums.push(album);
-      // }
+      if ('c' in album.c[0]) {
+        var tracks = [];
+        album.c.forEach(function(disk) {
+          tracks = tracks.concat(disk.c.map(function(track) { return { n: disk.n + '/' + track.n }; }));
+        });
+        album.c = tracks;
+      }
+      albums.push(album);
     });
 
     fn(null, albums);
