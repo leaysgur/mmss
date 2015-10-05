@@ -20,12 +20,13 @@ TrackList.prototype = {
     window.addEventListener('message', this, false);
   },
   handleEvent: function(ev) {
-    var data = ev.data;
-    if (data.action === 'SELECT_ALBUM') {
+    var action = ev.data.action,
+        data   = ev.data.data;
+    if (action === 'SELECT_ALBUM') {
       this.data.album = data.album;
       this._show(data.album);
     }
-    if (data.action === 'SELECT_ARTIST') {
+    if (action === 'SELECT_ARTIST') {
       this.data.artistName = data.name;
     }
   },
@@ -47,7 +48,7 @@ TrackList.prototype = {
       var name = ev.target.getAttribute('data-name');
       if (name.length === 0) { return; }
 
-      window.postMessage({ action: 'SELECT_TRACK', name: name }, location.origin);
+      window.postMessage({ action: 'SELECT_TRACK', data: { name: name } }, location.origin);
     }, false);
    }
 };

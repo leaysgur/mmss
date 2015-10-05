@@ -18,11 +18,12 @@ PlayList.prototype = {
     window.addEventListener('message', this, false);
   },
   handleEvent: function(ev) {
-    var data = ev.data;
-    if (data.action === 'SELECT_TRACK') {
+    var action = ev.data.action,
+        data   = ev.data.data;
+    if (action === 'SELECT_TRACK') {
       this._cloneTrackList();
     }
-    if (data.action === 'TRACK_END') {
+    if (action === 'TRACK_END') {
       this._triggerNext(data.name);
     }
   },
@@ -34,7 +35,7 @@ PlayList.prototype = {
       var name = ev.target.getAttribute('data-name');
       if (name.length === 0) { return; }
 
-      window.postMessage({ action: 'SELECT_TRACK', name: name }, location.origin);
+      window.postMessage({ action: 'SELECT_TRACK', data: { name: name } }, location.origin);
     }, false);
    },
   _triggerNext: function(name) {
@@ -42,7 +43,7 @@ PlayList.prototype = {
     var trackList = [].slice.call(li).map(function(el) { return el.getAttribute('data-name'); });
     var idx = trackList.indexOf(name) + 1;
     idx = idx === trackList.length ? 0 : idx;
-    window.postMessage({ action: 'PLAY_TRACK', name: trackList[idx] }, location.origin);
+    window.postMessage({ action: 'PLAY_TRACK', data: { name: trackList[idx] } }, location.origin);
    }
 };
 

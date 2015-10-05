@@ -20,12 +20,13 @@ Player.prototype = {
     window.addEventListener('message', this, false);
   },
   handleEvent: function(ev) {
-    var data = ev.data;
-    if (data.action === 'SELECT_TRACK') {
+    var action = ev.data.action,
+        data   = ev.data.data;
+    if (action === 'SELECT_TRACK') {
       this.data.name = data.name;
       this._load(data.name);
     }
-    if (data.action === 'PLAY_TRACK') {
+    if (action === 'PLAY_TRACK') {
       this.data.name = data.name;
       this._load(data.name);
     }
@@ -58,7 +59,7 @@ Player.prototype = {
     this.$.audio.removeEventListener('ended', this._handleTrackEnd.bind(this), false);
 
     var name = this.data.name;
-    window.postMessage({ action: 'TRACK_END', name: name }, location.origin);
+    window.postMessage({ action: 'TRACK_END', data: { name: name } }, location.origin);
   }
 };
 

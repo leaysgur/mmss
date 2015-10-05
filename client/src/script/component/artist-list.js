@@ -43,7 +43,7 @@ ArtistList.prototype = {
       var name = ev.target.getAttribute('data-name');
       if (name.length === 0) { return; }
 
-      window.postMessage({ action: 'SELECT_ARTIST', name: name }, location.origin);
+      window.postMessage({ action: 'SELECT_ARTIST', data: { name: name } }, location.origin);
     }, false);
   }
 };

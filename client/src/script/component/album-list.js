@@ -20,8 +20,9 @@ AlbumList.prototype = {
     window.addEventListener('message', this, false);
   },
   handleEvent: function(ev) {
-    var data = ev.data;
-    if (data.action === 'SELECT_ARTIST') {
+    var action = ev.data.action,
+        data   = ev.data.data;
+    if (action === 'SELECT_ARTIST') {
       this._load(data.name);
     }
   },
@@ -62,7 +63,7 @@ AlbumList.prototype = {
       return album.n === name;
     })[0];
 
-    window.postMessage({ action: 'SELECT_ALBUM', album: album }, location.origin);
+    window.postMessage({ action: 'SELECT_ALBUM', data: { album: album } }, location.origin);
   }
 };
 
