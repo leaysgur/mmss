@@ -9,7 +9,7 @@ var middleware   = require('app/middleware');
 var app = express();
 
 // テンプレートまわり
-app.set('views', __dirname + '/../tmpls');
+app.set('views', './');
 app.set('view engine', 'html');
 app.engine('html', require('consolidate').lodash);
 
