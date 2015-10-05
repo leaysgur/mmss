@@ -12,6 +12,8 @@ case '/player':
   new TrackList();
   var Player = require('./component/player');
   new Player();
+  var Notifier = require('./component/notifier');
+  new Notifier();
   var PlayList = require('./component/play-list');
   new PlayList();
   break;

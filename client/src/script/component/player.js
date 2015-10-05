@@ -51,6 +51,9 @@ Player.prototype = {
     var objectUrl = window.URL.createObjectURL(blob);
     this.$.audio.removeEventListener('ended', this._handleTrackEnd.bind(this), false);
     this.$.audio.src = objectUrl;
+
+    var name = this.data.name;
+    window.postMessage({ action: 'TRACK_START', data: { name: name } }, location.origin);
   },
   _bindEvent: function() {
     this.$.audio.addEventListener('ended', this._handleTrackEnd.bind(this), false);
