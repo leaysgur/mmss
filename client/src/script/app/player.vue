@@ -1,7 +1,7 @@
 <template>
   <h2>ストリーミング</h2>
 
-  <div class="columnWrap columnWrap-mTop">
+  <div class="columnWrap columnWrap-mTop" v-class="{ 'columnWrap-mDisabled': isDrawerVisible }">
     <div class="columnWrap-item columnWrap-item-mShort">
       <artist-list-view></artist-list-view>
     </div>
@@ -12,9 +12,11 @@
       <track-list-view></track-list-view>
     </div>
   </div>
+
   <div class="columnWrap columnWrap-mBtm content">
     <button v-on="click: onClickToggler">Toggle PlayList</button>
   </div>
+
   <div class="drawer" v-class="{ 'drawer-mActive': isDrawerVisible }">
     <h2>プレイリスト</h2>
     <play-list-view></play-list-view>

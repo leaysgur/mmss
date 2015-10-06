@@ -38,6 +38,11 @@
 .columnWrap {
   display: flex;
 
+  &-mDisabled {
+    pointer-events: none;
+    opacity: .4;
+  }
+
   &-mTop {
     height: 80%;
   }
