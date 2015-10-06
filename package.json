@@ -4,6 +4,7 @@
   "description": "My Music Streaming Server",
   "main": "server/main.js",
   "scripts": {
+    "build": "mkdir -p client/build && npm run build-js && npm run build-css",
     "build-css": "node-sass --output-style compressed client/src/style/main.scss client/build/main.css",
     "build-js":  "browserify -t vueify -t uglifyify -e client/src/script/main.js -o client/build/main.js",
     "watch-css": "node-sass -w -r client/src/style/main.scss client/build/main.css",
