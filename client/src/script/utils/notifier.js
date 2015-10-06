@@ -37,6 +37,7 @@ Notifier.prototype = {
     ntf = new Notification(tag.ti, {
       tag:  'nowplaying',
       body: tag.ar + ' - ' + tag.al,
+      icon: '/icon.jpg'
     });
 
     timer = setTimeout(function() {
