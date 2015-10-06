@@ -11,6 +11,6 @@ module.exports = {
       name: 'Stream'
     }
   },
-  PORT: 8888,
+  PORT: 9999,
   MUSIC_PATH: ''
 };
