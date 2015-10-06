@@ -1,6 +1,13 @@
 <style lang="scss">
 .player {
+  display: flex;
+  align-items: center;
   padding: 16px 0;
+
+  &-disp {
+    text-indent: 8px;
+    font-size: .8em;
+  }
 }
 </style>
 <template>
@@ -12,6 +19,7 @@
     controls
     autoplay
   ></audio>
+  <div class="player-disp">{{nowPlaying}}</div>
 </div>
 </template>
 <script>
@@ -21,7 +29,8 @@ module.exports = {
   data: function() {
     return {
       name: '',
-      srcUrl: null
+      srcUrl: null,
+      nowPlaying: ''
     };
   },
   watch: {
@@ -36,6 +45,9 @@ module.exports = {
       }
       if (action === 'PLAY_TRACK') {
         this.name = data.name;
+      }
+      if (action === 'NOTIFY_NOWPLAYING') {
+        this._showNowPlaying(data);
       }
     },
     _load: function(name) {
@@ -57,6 +69,9 @@ module.exports = {
       this.srcUrl = objectUrl;
 
       window.postMessage({ action: 'TRACK_START', data: { name: this.name } }, location.origin);
+    },
+    _showNowPlaying: function(tag) {
+      this.nowPlaying = tag.ti + ' from ' + tag.al + ' by ' + tag.ar;
     },
     onAudioEnded: function() {
       window.postMessage({ action: 'TRACK_END', data: { name: this.name } }, location.origin);

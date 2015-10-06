@@ -44,7 +44,6 @@ module.exports = {
           data   = ev.data.data;
       if (action === 'SYNC_PLAYLIST') {
         this.$data = data;
-        console.log(data);
       }
       if (action === 'TRACK_END') {
         this._triggerNext(data.name);
