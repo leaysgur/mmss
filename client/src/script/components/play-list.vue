@@ -1,9 +1,26 @@
-<style>
+<style lang="scss">
+.playList-item {
+  display: flex;
+
+  &-trackNo {
+    width: 28px;
+    margin-right: 8px;
+    text-align: right;
+  }
+
+  &-trackInfo {
+    width: 32%;
+  }
+}
 </style>
 <template>
-<ul>
-  <li v-repeat="track in items" v-on="click: onClickTrack(track.n)">
-    {{_getTrackNo(track.t.tr)}} {{track.t.ti}}
+<ul class="playList">
+  <li v-show="items.length === 0">曲を選択してください</li>
+  <li class="playList-item clickableLi" v-repeat="track in items" v-on="click: onClickTrack(track.n)">
+    <div class="playList-item-trackNo">{{_getTrackNo(track.t.tr)}}</div>
+    <div class="playList-item-trackInfo">{{track.t.ti}}</div>
+    <div class="playList-item-trackInfo">{{track.t.al}}</div>
+    <div class="playList-item-trackInfo">{{track.t.ar}}</div>
   </li>
 </ul>
 </template>
@@ -27,6 +44,7 @@ module.exports = {
           data   = ev.data.data;
       if (action === 'SYNC_PLAYLIST') {
         this.$data = data;
+        console.log(data);
       }
       if (action === 'TRACK_END') {
         this._triggerNext(data.name);

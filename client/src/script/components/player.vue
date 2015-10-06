@@ -1,6 +1,10 @@
-<style>
+<style lang="scss">
+.player {
+  padding: 16px 0;
+}
 </style>
 <template>
+<div class="player">
   <audio
     v-show="srcUrl"
     v-attr="src: srcUrl"
@@ -8,6 +12,7 @@
     controls
     autoplay
   ></audio>
+</div>
 </template>
 <script>
 var axios = require('axios');
