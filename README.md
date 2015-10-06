@@ -25,7 +25,6 @@ My Mp3 S(earch|treaming) Server!
 あとは、「TSUTAYAにいる時に、コレが借りたことあるアルバムかどうか調べたい」っていうシーンが多いので、ファイル検索の機能もセットで。
 
 ## DEMO
-[URL](#)
 
 ## 機能
 - アルバム検索
@@ -98,6 +97,7 @@ var audio = new Audio(objectUrl);
 ```
 
 こう。
+Web Audio APIなら`createBufferSource`に`decodeAudioData`したものを。
 
 ### 通知
 ```javascript
@@ -131,7 +131,7 @@ EventEmitterなんて用意しなくてももうコレでいいのでは！速�
 - バイナリ解析するほうがよっぽど遅い
 - アルバムのデータ(と、それぞれの曲データ)とってくるところが一番遅い
 
-### WebAudio
+### WebでAudio
 - このレベルでもHTML Audioだと既に辛い
 - けどWeb Audioはそういう用途じゃないのでコレはコレで辛い
 - 辛い
