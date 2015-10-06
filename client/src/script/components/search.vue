@@ -1,5 +1,8 @@
 <style lang="scss">
 .search {
+  width: 80%;
+  margin: 0 auto;
+
   &-form {
     display: flex;
     margin-bottom: 8px;
