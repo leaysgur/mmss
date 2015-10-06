@@ -1,5 +1,6 @@
 <template>
 <ul>
+  <li v-show="items.length === 0">アーティストを選択してください</li>
   <li class="clickableLi" v-repeat="album in items" v-on="click: onClickAlbum(album.n)">
     {{album.n}}
   </li>

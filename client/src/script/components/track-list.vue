@@ -11,6 +11,7 @@
 </style>
 <template>
 <ul class="trackList">
+  <li v-show="items.length === 0">アルバムを選択してください</li>
   <li class="trackList-item clickableLi" v-repeat="track in items" v-on="click: onClickTrack(track.n)">
     <div class="trackList-item-trackNo">{{_getTrackNo(track.t.tr)}}</div>
     <div>{{track.t.ti}}</div>
