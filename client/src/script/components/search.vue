@@ -26,6 +26,7 @@
     <button class="search-form-btn" v-on="click: execSearch" v-attr="disabled: isQueryEmpty">Search</button>
   </div>
 
+  <p v-show="found.length !== 0" class="content">{{found.length}}件見つかりました。</p>
   <ul class="search-res">
     <li class="search-res-item" v-show="isNotFound">見つかりませんでした</li>
     <li class="search-res-item" v-repeat="set in found">
