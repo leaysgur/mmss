@@ -1,19 +1,21 @@
 <template>
   <h2>ストリーミング</h2>
 
-  <div class="columnWrap">
-    <div class="columnWrap-item">
+  <div class="columnWrap columnWrap-mTop">
+    <div class="columnWrap-item columnWrap-item-mShort">
       <artist-list-view></artist-list-view>
     </div>
-    <div class="columnWrap-item">
+    <div class="columnWrap-item columnWrap-item-mShort">
       <album-list-view></album-list-view>
     </div>
-    <div class="columnWrap-item">
+    <div class="columnWrap-item columnWrap-item-mWide">
       <track-list-view></track-list-view>
     </div>
   </div>
-  <play-list-view></play-list-view>
-  <player-view></player-view>
+  <div class="columnWrap columnWrap-mBtm">
+    <play-list-view></play-list-view>
+    <player-view></player-view>
+  </div>
 
 </template>
 <script>

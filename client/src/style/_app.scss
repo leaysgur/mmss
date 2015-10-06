@@ -25,6 +25,10 @@
   }
 }
 
+.wrap {
+  height: 100%;
+}
+
 .content {
   margin: 8px;
 }
@@ -32,8 +36,19 @@
 .columnWrap {
   display: flex;
 
+  &-mTop {
+    height: 80%;
+  }
+  &-mBtm {
+    height: 10%;
+  }
+
   &-item {
     padding: 8px;
     width: 33%;
+    overflow: scroll;
+
+    &-mShort { width: 28%; }
+    &-mWide  { width: 44%; }
   }
 }
