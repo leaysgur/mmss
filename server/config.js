@@ -8,7 +8,7 @@ module.exports = {
     },
     STREAMING: {
       url:  '/player',
-      name: 'Streaming'
+      name: 'Stream'
     }
   },
   PORT: 8888,

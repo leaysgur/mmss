@@ -1,19 +1,14 @@
-<style>
-</style>
 <template>
   <h2>ストリーミング</h2>
-  <p>
-    この機能はログインが必要
+  <p class="content">
+    この先はログインが必要です。
   </p>
-  <login-view></login-view>
-
-  <a href="/">トップへ</a>
+  <div class="content">
+    <login-view></login-view>
+  </div>
 </template>
 <script>
 module.exports = {
-  data: function() {
-    return {};
-  },
   components: {
     loginView: require('../components/login.vue')
   }
