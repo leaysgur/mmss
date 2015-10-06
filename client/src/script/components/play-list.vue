@@ -60,22 +60,32 @@ module.exports = {
         this.$data = data;
       }
       if (action === 'TRACK_END') {
-        this._triggerNext(data.name);
+        this._triggerMove(data.name, 'IS_NEXT');
+      }
+      if (action === 'TRACK_BACK') {
+        this._triggerMove(data.name);
       }
     },
     _getTrackNo: function(str) {
       return str.split('/')[0];
     },
-    _triggerNext: function(name) {
+    _triggerMove: function(name, isNext) {
       var mName = this.artistName + '/' + this.album.n + '/';
       var trackList = this.items.map(function(track) {
         return mName + track.n;
       });
-      var idx = trackList.indexOf(name) + 1;
-      idx = idx === trackList.length ? 0 : idx;
+
+      var idx;
+      if (isNext) {
+        idx = trackList.indexOf(name) + 1;
+        idx = idx === trackList.length ? 0 : idx;
+      } else {
+        idx = trackList.indexOf(name) - 1;
+        idx = idx < 0 ? trackList.length - 1 : idx;
+      }
 
       window.postMessage({ action: 'PLAY_TRACK', data: { name: trackList[idx] } }, location.origin);
-     }
+    }
   },
   created: function() {
     window.addEventListener('message', this, false);

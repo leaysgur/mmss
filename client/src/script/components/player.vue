@@ -13,6 +13,7 @@
 <template>
 <div class="player">
   <audio
+    v-el="player"
     v-show="srcUrl"
     v-attr="src: srcUrl"
     v-on="ended: onAudioEnded"
@@ -49,6 +50,9 @@ module.exports = {
       if (action === 'NOTIFY_NOWPLAYING') {
         this._showNowPlaying(data);
       }
+      if (action === 'KEYDOWN') {
+        this._handleKey(data.key);
+      }
     },
     _load: function(name) {
       axios
@@ -69,6 +73,19 @@ module.exports = {
       this.srcUrl = objectUrl;
 
       window.postMessage({ action: 'TRACK_START', data: { name: this.name } }, location.origin);
+    },
+    _handleKey: function(key) {
+      var player = this.$$.player;
+      if (!this.srcUrl) { return; }
+      if (key === 'U') { player.volume += 0.1; }
+      if (key === 'D') { player.volume -= 0.1; }
+      if (key === 'R') { player.currentTime = player.duration; }
+      if (key === 'L') { (player.currentTime|0) === 0 ? __trackBack.call(this) : player.currentTime = 0; }
+      if (key === 'S') { player.paused ? player.play() : player.pause(); }
+
+      function __trackBack() {
+        window.postMessage({ action: 'TRACK_BACK', data: { name: this.name } }, location.origin);
+      }
     },
     _showNowPlaying: function(tag) {
       this.nowPlaying = tag.ti + ' from ' + tag.al + ' by ' + tag.ar;
