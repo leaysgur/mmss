@@ -1,18 +1,20 @@
-<style>
-</style>
 <template>
   <h2>ストリーミング</h2>
 
-  <artist-list-view></artist-list-view>
-  <album-list-view></album-list-view>
-  <track-list-view></track-list-view>
-
-  <hr>
-
+  <div class="columnWrap">
+    <div class="columnWrap-item">
+      <artist-list-view></artist-list-view>
+    </div>
+    <div class="columnWrap-item">
+      <album-list-view></album-list-view>
+    </div>
+    <div class="columnWrap-item">
+      <track-list-view></track-list-view>
+    </div>
+  </div>
   <play-list-view></play-list-view>
   <player-view></player-view>
 
-  <a href="/">トップへ</a>
 </template>
 <script>
 module.exports = {

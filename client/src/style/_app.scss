@@ -1,0 +1,39 @@
+.header {
+  position: relative;
+  line-height: 32px;
+  padding: 4px 0;
+  margin-bottom: 8px;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+
+  &-title {
+    flex: 1 1 auto;
+  }
+  &-menu {
+    position: absolute;
+    right: 4px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 0 8px;
+    height: 32px;
+    width: 80px;
+    color: #fff;
+    background-color: #aaa;
+    font-size: 1em;
+  }
+}
+
+.content {
+  margin: 8px;
+}
+
+.columnWrap {
+  display: flex;
+
+  &-item {
+    padding: 8px;
+    width: 33%;
+  }
+}
