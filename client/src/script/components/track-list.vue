@@ -1,9 +1,19 @@
-<style>
+<style lang="scss">
+.trackList-item {
+  display: flex;
+
+  &-trackNo {
+    width: 28px;
+    margin-right: 8px;
+    text-align: right;
+  }
+}
 </style>
 <template>
-<ul>
-  <li v-repeat="track in items" v-on="click: onClickTrack(track.n)">
-    {{_getTrackNo(track.t.tr)}} {{track.t.ti}}
+<ul class="trackList">
+  <li class="trackList-item clickableLi" v-repeat="track in items" v-on="click: onClickTrack(track.n)">
+    <div class="trackList-item-trackNo">{{_getTrackNo(track.t.tr)}}</div>
+    <div>{{track.t.ti}}</div>
   </li>
 </ul>
 </template>

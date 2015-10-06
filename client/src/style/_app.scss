@@ -52,3 +52,11 @@
     &-mWide  { width: 44%; }
   }
 }
+
+.clickableLi {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

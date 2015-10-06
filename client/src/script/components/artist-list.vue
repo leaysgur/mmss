@@ -1,8 +1,6 @@
-<style>
-</style>
 <template>
 <ul>
-  <li v-repeat="items" v-on="click: onClickArtist($value)">
+  <li class="clickableLi" v-repeat="items" v-on="click: onClickArtist($value)">
     {{$value}}
   </li>
 </ul>

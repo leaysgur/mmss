@@ -1,8 +1,6 @@
-<style>
-</style>
 <template>
 <ul>
-  <li v-repeat="album in items" v-on="click: onClickAlbum(album.n)">
+  <li class="clickableLi" v-repeat="album in items" v-on="click: onClickAlbum(album.n)">
     {{album.n}}
   </li>
 </ul>
