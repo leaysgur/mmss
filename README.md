@@ -2,7 +2,7 @@
 My Mp3 S(earch|treaming) Server!
 
 ## なにこれ
-自分のためのmp3配信サーバーです。
+自分のためのmp3配信サーバー / クライアントです。
 
 - 主にiTunesでmp3をバックアップ
 - アーティスト名/アルバム名/アーティスト名 - 曲名.mp3
@@ -15,16 +15,15 @@ My Mp3 S(earch|treaming) Server!
 ただコレが、
 
 - Javaで動いてるのでコレのためだけにJava環境がいる..
-- 昔は日本語に弱くて文字化けがひどく、今も化け残りがいる
 - UIいけてない(framesetおばけ)
 - モバイルからAPI叩くのは有料
-- ログイン機能ついてるけど、URL構造知ってたら音源DLできちゃう
+- ログイン機能ついてるけど、URL構造知ってたら音源DLできちゃう(！)
 
-という不満があったので作ろうかと。
+という不満があったので、作ろうかと。
 
 あとは、「TSUTAYAにいる時に、コレが借りたことあるアルバムかどうか調べたい」っていうシーンが多いので、ファイル検索の機能もセットで。
 
-## DEMO
+## [DEMO](http://dev.lealog.net:9999)
 
 ## 機能
 - アルバム検索
@@ -34,7 +33,7 @@ My Mp3 S(earch|treaming) Server!
 - 自動曲送り
 - キーボードからのコントロール
 - 再生情報の通知
-- モバイルでも使える(最適化してないけど)
+- モバイルでも使える！(最適化してないけど)
 
 ## みどころ
 ### Express v4
@@ -75,9 +74,9 @@ app.use('/api', middleware.isLoginAPI, require('routes/auth/api'));
 
 Polymerよりも格段に使いやすかった(個人の感想です)
 
-- styleで`stylus`とか`less`とか`scss`とか使える
-- scriptで`coffee`とか使える
-- 空でも`style`タグ書いたら挿入されちゃうので注意
+- styleで`stylus`とか`scss`とか使える
+- scriptで`coffee`とか`babel`とかも使える
+- 空でも`style`タグ書いたらそれが挿入されちゃうので注意
 
 ### 音源を返す / 鳴らす
 ```javascript
@@ -99,18 +98,20 @@ var audio = new Audio(objectUrl);
 こう。
 Web Audio APIなら`createBufferSource`に`decodeAudioData`したものを。
 
+この取り回しの違いが・・・。
+
 ### 通知
 ```javascript
 new Notification('これだけで通知が出せる時代');
 ```
 
-詳しくはブログかいたよ
+[5分でわかった気になるWeb Notifications API - console.lealog();](http://lealog.hateblo.jp/entry/2015/10/07/105102)
 
 ### postMessage
 EventEmitterなんて用意しなくてももうコレでいいのでは！速いし！
 
 ## 作ってみて
-一言でいうと、「みんなiTunesつかおう」
+一言でいうと、「みんなiTunesつかおう」です。
 
 ### クライアントで頑張ってはいけない
 - 物理的にファイルにアクセスできないWeb、しかもAPIベースでやるもんじゃない
@@ -126,10 +127,11 @@ EventEmitterなんて用意しなくてももうコレでいいのでは！速�
   - 画像も取れるけどこんなものをxhrで送りつけるなんてとんでもない！
 
 ### 気になるパフォーマンス
-- 最初は15,000ファイルを`fs`でさわる起動時がパフォーマンスの悩みになると思ってた
+- 最初は15,000ファイルを`fs`でトラバーサルする起動時がパフォーマンスの悩みになると思ってた
 - 全然そんなことなかった
-- バイナリ解析するほうがよっぽど遅い
+- `readFile`してバイナリ解析するほうがよっぽど遅い
 - アルバムのデータ(と、それぞれの曲データ)とってくるところが一番遅い
+- めっちゃ遅い
 
 ### WebでAudio
 - このレベルでもHTML Audioだと既に辛い
