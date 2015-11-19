@@ -23,7 +23,7 @@ My Mp3 S(earch|treaming) Server!
 
 あとは、「TSUTAYAにいる時に、コレが借りたことあるアルバムかどうか調べたい」っていうシーンが多いので、ファイル検索の機能もセットで。
 
-## [DEMO](http://dev.lealog.net:9999)
+## DEMO
 
 ## 機能
 - アルバム検索
